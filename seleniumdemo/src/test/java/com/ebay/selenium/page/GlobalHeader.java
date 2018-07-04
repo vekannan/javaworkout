@@ -1,4 +1,4 @@
-package com.ebay.pages;
+package com.ebay.selenium.page;
 
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;

@@ -1,4 +1,4 @@
-package com.selenium.test;
+package com.ebay.selenium.test;
 
 import org.junit.AfterClass;
 import org.junit.Assert;
@@ -8,8 +8,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.PageFactory;
 
-import com.ebay.pages.GlobalHeader;
 import com.ebay.pages.SearchResultPage;
+import com.ebay.selenium.page.GlobalHeader;
 
 public class GlobalHeaderTest {
 
