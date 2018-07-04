@@ -1,4 +1,4 @@
-package com.ebay.pages;
+package com.ebay.sample;
 
 
 public class Fibonacci {

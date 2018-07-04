@@ -8,8 +8,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.PageFactory;
 
-import com.ebay.pages.SearchResultPage;
 import com.ebay.selenium.page.GlobalHeader;
+import com.ebay.selenium.page.SearchResultPage;
 
 public class GlobalHeaderTest {
 
