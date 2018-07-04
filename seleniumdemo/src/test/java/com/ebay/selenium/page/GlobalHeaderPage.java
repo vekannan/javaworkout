@@ -3,7 +3,7 @@ package com.ebay.selenium.page;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class GlobalHeader {
+public class GlobalHeaderPage {
 
 	@FindBy(id = "gh-ac")
 	private WebElement searchText;
