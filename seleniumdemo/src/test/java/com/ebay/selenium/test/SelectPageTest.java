@@ -1,7 +1,6 @@
 package com.ebay.selenium.test;
 
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import org.junit.AfterClass;
 import org.junit.Assert;
@@ -11,7 +10,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.ebay.selenium.page.SeleniumDropDownDemo;
 
@@ -58,7 +59,8 @@ public class SelectPageTest {
 		sb.setLength(Math.max(sb.length() - 1, 0));
 		
 		seleniumDropDownDemo.clickPrintAllElement();
-		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);	
+		//driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);	
+		new WebDriverWait(driver, 10).until(ExpectedConditions.elementToBeSelected(seleniumDropDownDemo.getPrintAllElement()));
 		String result_text = seleniumDropDownDemo.getMultiSelectResultElement().getText();
 		
 		Assert.assertTrue(result_text.equals("Options selected are : "+sb.toString()));

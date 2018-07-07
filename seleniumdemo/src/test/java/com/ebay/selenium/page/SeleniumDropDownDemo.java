@@ -11,6 +11,16 @@ public class SeleniumDropDownDemo {
 	@FindBy(className = "selected-value")
 	private WebElement selectedResult;
 	
+	@FindBy(name = "States")
+	private WebElement multiSelect;
+	
+	@FindBy(className = "getall-selected")
+	private WebElement multiSelectedResult;
+	
+	
+	@FindBy(id = "printAll")
+	private WebElement printAllButton;
+	
 	public WebElement getDropDownElement() {
 		return dropDown;
 	}
@@ -18,4 +28,22 @@ public class SeleniumDropDownDemo {
 	public WebElement getResultElement() {
 		return selectedResult;
 	}
+	
+	public WebElement getMultiSelectElement() {
+		return multiSelect;
+	}
+	
+	public WebElement getMultiSelectResultElement() {
+		return multiSelectedResult;
+	}
+	
+	public WebElement getPrintAllElement() {
+		return printAllButton;
+	}
+	
+	public void clickPrintAllElement() {
+		 printAllButton.click();
+	}
+	
+	
 }
