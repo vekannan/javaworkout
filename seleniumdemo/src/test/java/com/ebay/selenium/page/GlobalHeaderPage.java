@@ -25,6 +25,15 @@ public class GlobalHeaderPage {
 	@FindBy(id = "s0-container")
 	private WebElement categoryContainer;
 	
+	@FindBy(xpath = ".//*[@id='s0-container']/li[3]/a")
+	private WebElement motorsLink;
+	
+	@FindBy(xpath = ".//*[@id='s0-container']/li[3]/div[2]/div[1]/div[1]/ul/li[1]/a")
+	private WebElement vehicleLink;
+	
+	@FindBy(className = "hl-cat-nav__flyout")
+	private WebElement catOverlay;
+	
 	/**
 	 * Enters search keyword in the search text box and clicks search button
 	 * @param searchKeyword
@@ -58,5 +67,17 @@ public class GlobalHeaderPage {
 //		driver.findElement(By.cssSelector(selector_For_Element_To_Be_Click_After_Hover)).click();
 
 		//webElements.get(0).get
+	}
+	
+	public WebElement navigateToGotorsLink() {
+		return motorsLink;
+	}
+	
+	public WebElement navigateToVehicleLink() {
+		return vehicleLink;
+	}
+	
+	public WebElement catOverlay() {
+		return catOverlay;
 	}
 }

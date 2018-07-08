@@ -1,12 +1,19 @@
 package com.ebay.selenium.test;
 
+import java.io.File;
+import java.util.concurrent.TimeUnit;
 import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.ebay.selenium.page.AutoPartsPage;
@@ -57,10 +64,20 @@ public class GlobalHeaderPageTest {
 		
 		driver.get("http://www.ebay.com");
 		GlobalHeaderPage globalHeaderPage = PageFactory.initElements(driver, GlobalHeaderPage.class);
-		WebDriverWait wait = new WebDriverWait(driver, 5);
-		//wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(selector_For_Element_To_Be_Click_After_Hover)));
-		//driver.findElement(By.cssSelector(selector_For_Element_To_Be_Click_After_Hover)).click();
+		Actions actions = new Actions(driver);
+		WebElement mainMenu = globalHeaderPage.navigateToGotorsLink();
+		actions.moveToElement(mainMenu);
+		WebElement subMenu = globalHeaderPage.navigateToVehicleLink();
+		actions.perform();
+		File scrFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+		//FileUtils.copyFile(scrFile, new File("D:\\screenshot.png"));
+		WebDriverWait wait = new WebDriverWait(driver, TimeUnit.MILLISECONDS.toSeconds(50000) );
+		wait.until(ExpectedConditions.visibilityOf(globalHeaderPage.catOverlay()));
+		actions.moveToElement(subMenu);
+		actions.click().build().perform();
+		
 	}
+	
 	
 	
 

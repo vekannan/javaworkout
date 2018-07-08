@@ -1,11 +1,13 @@
 package com.ebay.selenium.test;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -57,10 +59,13 @@ public class SelectPageTest {
 			sb.append(",");
 		}
 		sb.setLength(Math.max(sb.length() - 1, 0));
-		
+		WebDriverWait wait = new WebDriverWait(driver,TimeUnit.MILLISECONDS.toSeconds(50000) );
+		wait.until(ExpectedConditions.elementToBeClickable(seleniumDropDownDemo.getPrintAllElement()));
 		seleniumDropDownDemo.clickPrintAllElement();
+		wait.until(ExpectedConditions.textToBePresentInElement(seleniumDropDownDemo.getMultiSelectResultElement(), "Options selected are : "+sb.toString()));
 		//driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);	
-		new WebDriverWait(driver, 10).until(ExpectedConditions.elementToBeSelected(seleniumDropDownDemo.getPrintAllElement()));
+		//new WebDriverWait(driver, 10).until(ExpectedConditions.elementToBeSelected(seleniumDropDownDemo.getPrintAllElement()));
+		
 		String result_text = seleniumDropDownDemo.getMultiSelectResultElement().getText();
 		
 		Assert.assertTrue(result_text.equals("Options selected are : "+sb.toString()));
