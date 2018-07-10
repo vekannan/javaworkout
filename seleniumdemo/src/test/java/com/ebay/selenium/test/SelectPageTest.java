@@ -3,18 +3,22 @@ package com.ebay.selenium.test;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-import org.junit.AfterClass;
-import org.junit.Assert;
-import org.junit.BeforeClass;
-import org.junit.Test;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Parameters;
+import org.testng.annotations.Test;
 
 import com.ebay.selenium.page.SeleniumDropDownDemo;
 
@@ -27,10 +31,30 @@ public class SelectPageTest {
 		driver = new ChromeDriver();
 	}
 	
+	@Parameters({ "browser" })
+	@BeforeTest
+	public void openBrowser(String browser) {
+		try {
+			if (browser.equalsIgnoreCase("Firefox")) {
+				driver = new FirefoxDriver();
+			} else if (browser.equalsIgnoreCase("chrome")) {
+				System.setProperty("webdriver.chrome.driver", "C:\\Users\\venkatesan\\Downloads\\chromedriver.exe");
+				driver = new ChromeDriver();
+			} else if (browser.equalsIgnoreCase("IE")) {
+				System.setProperty("webdriver.ie.driver",
+						"D:/IEDriverServer.exe");
+				driver = new InternetExplorerDriver();
+			}
+		
+		} catch (WebDriverException e) {
+			System.out.println(e.getMessage());
+		}
+	}
+	
 	@Test
 	public void selectSamples()
 	{
-		driver.get("http://www.seleniumeasy.com/test/basic-select-dropdown-demo.html");
+		driver.navigate().to("http://www.seleniumeasy.com/test/basic-select-dropdown-demo.html");
 		SeleniumDropDownDemo seleniumDropDownDemo = PageFactory.initElements(driver, SeleniumDropDownDemo.class);
 		WebElement element=seleniumDropDownDemo.getDropDownElement();
 		Select se=new Select(element);
@@ -46,7 +70,8 @@ public class SelectPageTest {
 	
 	@Test
 	public void multiSelectExample() {
-		driver.get("http://www.seleniumeasy.com/test/basic-select-dropdown-demo.html");
+		driver.navigate().to("http://www.seleniumeasy.com/test/basic-select-dropdown-demo.html");
+		driver.manage().window().maximize();
 		SeleniumDropDownDemo seleniumDropDownDemo = PageFactory.initElements(driver, SeleniumDropDownDemo.class);
 		WebElement element = seleniumDropDownDemo.getMultiSelectElement();
 		Select se=new Select(element);
